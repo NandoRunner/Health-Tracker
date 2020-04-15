@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-menu-toggle slot="start" menu="main-menu"></app-menu-toggle>
+    <ion-title>{{ "glucose.title" | translate }} </ion-title>
+    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="lists$ | async as lists">
+      <ion-item color="secondary">
+      <ion-label>{{ "date" | translate }}</ion-label>
+      <ion-label>mg/dL</ion-label>
+    </ion-item>
+    <ng-container *ngIf="lists.length > 0; else noTasks">
+      <app-glucose-item
+        *ngFor="let list of lists"
+        [item]="list"
+        (update)="onUpdate($event)"
+        (delete)="onDelete($event)"
+      ></app-glucose-item>
+    </ng-container>
+    <ng-template #noTasks>
+      <ion-item lines="none">{{ "no-list" | translate }}</ion-item>
+    </ng-template>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button routerLink="/glucoses/chart" routerDirection="forward">
+      <ion-icon name="stats-chart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/glucoses/create" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

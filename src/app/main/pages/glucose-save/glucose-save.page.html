@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/glucoses"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle | translate}}</ion-title>
+    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="formGroup" (submit)="onSubmit()">
+    <ion-item>
+      <ion-icon name="water" slot="start" color="primary"></ion-icon>
+      <ion-input
+        type="number"
+        placeholder="mg/dL"
+        autofocus="true"
+        inputmode="decimal"
+        formControlName="value"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+      <ion-datetime
+        (ionChange)="changeDate($event.detail.value)"
+        displayFormat="DD/MM/YYYY"
+        value="{{myDate}}"
+        formControlName="date"
+      ></ion-datetime>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="formGroup.invalid">
+      {{'save' | translate}}
+    </ion-button>
+  </form>
+</ion-content>

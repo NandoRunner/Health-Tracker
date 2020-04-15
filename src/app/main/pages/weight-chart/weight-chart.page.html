@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/weights"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "weight.title" | translate }} </ion-title>
+
+    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label>{{ "chart.select" | translate }}</ion-label>
+    <ion-select (ionChange)="changeType($event.detail.value)" value=0>
+      <ion-select-option value=0>{{ "chart.bar" | translate }}</ion-select-option>
+      <ion-select-option value=1>{{ "chart.pie" | translate }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>{{subTitle}}</ion-card-subtitle>
+      <ion-card-title>{{title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div [hidden]="!showPie">
+        <canvas #viewPieChart></canvas>
+      </div>  
+      <div [hidden]="!showBar">
+        <canvas #viewBarChart></canvas>
+      </div>  
+    </ion-card-content>
+  </ion-card>
+</ion-content>
