@@ -2,7 +2,7 @@
 	"name": "health-tracker",
 	"version": "0.20.14",
 	"author": "NandoRunner",
-	"homepage": "https://ionicframework.com/",
+	"homepage": "https://github.com/NandoRunner/Health-Tracker",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",

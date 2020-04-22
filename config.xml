@@ -2,7 +2,7 @@
 <widget id="com.fandradetecinfo.healthtracker" version="0.20.14">
     <name>health-tracker</name>
     <description>Health Tracker</description>
-    <author email="nando.az@gmail.com" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <author email="nando.az@gmail.com" href="https://github.com/NandoRunner/Health-Tracker">NandoRunner</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
