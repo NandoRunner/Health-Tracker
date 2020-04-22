@@ -25,10 +25,9 @@ export class WeightChartPage extends BaseChartPage {
   }
 
   async ngOnInit(): Promise<void> {
-    this.splitMin = 80.5;
-    this.splitMax = 81;
+    // this.splitMin = 80.5;
+    // this.splitMax = 81;
     this.measure = "Kg";
-    this.listLabels = [`< ${this.splitMin} ${this.measure}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure}`, `>= ${this.splitMax} ${this.measure}`];
     await this.loadData();
     this.changeType("0");
   }
@@ -41,9 +40,11 @@ export class WeightChartPage extends BaseChartPage {
   
   changeType(param: any) {
     this.showBar = this.showPie = false;
-
+    this.prepareSplitGroups();
+ 
     if (param === "1")
     {
+      this.listLabels = [`< ${this.splitMin} ${this.measure}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure}`, `>= ${this.splitMax} ${this.measure}`];
       this.createPieChart();
     }
     else

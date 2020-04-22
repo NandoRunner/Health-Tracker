@@ -4,12 +4,12 @@ import { Chart } from 'chart.js';
 
 export class BaseChartPage implements OnInit {
 
-  protected title: string;
-  protected subTitle: string;
+  public title: string;
+  public subTitle: string;
   protected language: string;
 
-  protected showPie: boolean = false;
-  protected showBar: boolean = true;
+  public showPie: boolean = false;
+  public showBar: boolean = true;
 
   protected listColors: string[];
   protected listLabels: string[];
@@ -56,15 +56,40 @@ export class BaseChartPage implements OnInit {
           labels: {
             boxWidth: 0
           }
+        }, scales: {
+          yAxes: []
         }
-      // },
-      // scales: {
-      //   yAxes: [{
-      //     ticks: {
-      //       beginAtZero: true,
-      //     }
-      //   }]
       }
+    });
+  }
+
+  protected prepareSplitGroups()
+  {
+    let min = 0;
+    let max = 0;
+    let primeiro = true;
+
+    this.lists$.forEach(a => {
+      a.forEach(b => {
+        //console.log(b.value);
+        if (primeiro) {
+          min = b.value;
+          max = b.value;
+          primeiro = false;
+        }
+
+        if (b.value > max) {
+          max = b.value;
+        }
+        else if (b.value < min) {
+          min = b.value;
+        }
+      });
+      let dif = max - min;
+      dif /= 3;
+      this.splitMin = parseFloat((min + dif).toFixed(1));
+      this.splitMax = parseFloat((max - dif).toFixed(1));
+      this.myBarChart.options.scales.yAxes[0].ticks.min = min - dif;
     });
   }
 
@@ -90,12 +115,12 @@ export class BaseChartPage implements OnInit {
 
   protected prepareBarChart(maxItems: number) {
     this.myBarChart.data.datasets[0].label = this.measure;
-
+    
     var i = 0;
     this.lists$.forEach(a => {
       a.forEach(b => {
         if (i < maxItems) {
-          this.myBarChart.data.labels[i] = b.date.toDate().toISOString().split('T')[0];
+          this.myBarChart.data.labels[i] = b.date.toDate().toLocaleString().split(' ')[0];
           this.myBarChart.data.datasets[0].backgroundColor[i] =  this.listColors[this.getIndexValue(b.value)];
           this.myBarChart.data.datasets[0].data[i++] = b.value;
           this.myBarChart.update();
