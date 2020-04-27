@@ -28,7 +28,6 @@ export class GlucoseChartPage extends BaseChartPage {
     this.splitMin = 100;
     this.splitMax = 140;
     this.measure = "mg/dL";
-    this.listLabels = [`< ${this.splitMin} ${this.measure}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure}`, `>= ${this.splitMax} ${this.measure}`];
     await this.loadData();
     this.changeType("0");
   }
@@ -44,6 +43,7 @@ export class GlucoseChartPage extends BaseChartPage {
 
     if (param === "1")
     {
+      this.listLabels = [`< ${this.splitMin} ${this.measure}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure}`, `>= ${this.splitMax} ${this.measure}`];
       this.createPieChart();
     }
     else
@@ -56,15 +56,15 @@ export class GlucoseChartPage extends BaseChartPage {
     this.myBarChart = this.createChart('bar', this.viewBarChart);
     this.prepareBarChart(10);
     this.showBar = true;
-    this.subTitle = "Bar Chart";
-    this.title = "Last 10 glucose tests";
+    this.subTitle = "chart.bar.subTitle";
+    this.title = "chart.bar.title";
   }
 
   private createPieChart() {
     this.myPieChart = this.createChart('pie', this.viewPieChart);
     this.preparePieChart();
     this.showPie = true;
-    this.subTitle = "Pie Chart";
-    this.title = "Glucose tests count per group";
+    this.subTitle = "chart.pie.subTitle";
+    this.title = "chart.pie.title";
   }
 }

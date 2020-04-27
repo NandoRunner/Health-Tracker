@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
         provider
       });
       this.navCtrl.navigateForward(
-        this.route.snapshot.queryParamMap.get('redirect') || '/glucoses'
+        this.route.snapshot.queryParamMap.get('redirect') || '/weights'
       );
     } catch (e) {
       console.log('Auth error: ', e);

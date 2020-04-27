@@ -3,6 +3,8 @@ import { MenuController, NavController } from '@ionic/angular';
 
 import { AuthService } from 'src/app/core/services/auth.service';
 import { OverlayService } from 'src/app/core/services/overlay.service';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-logout-button',
@@ -21,7 +23,8 @@ export class LogoutButtonComponent implements OnInit {
     private authService: AuthService,
     private menuCtrl: MenuController,
     private navCtrl: NavController,
-    private overlayService: OverlayService
+    private overlayService: OverlayService,
+    private translate: TranslateService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -31,19 +34,25 @@ export class LogoutButtonComponent implements OnInit {
   }
 
   async logout(): Promise<void> {
-    await this.overlayService.alert({
-      message: 'Do you really want to quit?',
-      buttons: [
-        {
-          text: 'Yes',
-          handler: async () => {
-            await this.authService.logout();
-            await this.menuCtrl.enable(false, this.menu);
-            this.navCtrl.navigateRoot('/login');
-          }
-        },
-        'No'
-      ]
-    });
+    
+    await this.translate.get('login').subscribe(translation => {
+  
+      this.overlayService.alert({
+        message: translation.logout,
+        buttons: [
+          {
+            text: translation.yes,
+            handler: async () => {
+              await this.authService.logout();
+              await this.menuCtrl.enable(false, this.menu);
+              this.navCtrl.navigateRoot('/login');
+            }
+          },
+          translation.no
+        ]
+      });
+  });
+
+
   }
 }

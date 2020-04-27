@@ -4,8 +4,8 @@
   "date": "Date",
   "chart": {
     "select": "Select Chart Type",
-    "bar": "Bar",
-    "pie": "Pie"
+    "bar": { "name": "Bar", "title": "Last 10 tests", "subTitle": "Bar Chart" },
+    "pie": { "name": "Pie", "title": "Tests count per group", "subTitle": "Pie Chart" }
   },
   "weight": { "title": "Weight Measurements", "menu": "Weight", "new": "New", "edit": "Edit" },
   "blood-pressure": {
@@ -23,6 +23,9 @@
     "signup": "Sign Up",
     "exists": "Already have an account",
     "new": "Create account",
-    "facebook": "Login with Facebook"
+    "facebook": "Login with Facebook", 
+    "logout": "Do you really want to quit?",
+    "yes": "Yes",
+    "no": "no"
   }
 }

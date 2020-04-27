@@ -95,6 +95,7 @@ export class BaseChartPage implements OnInit {
 
   protected preparePieChart() {
     this.myPieChart.data.datasets[0].label = this.measure;
+    this.myPieChart.options.legend.labels.boxWidth = 8;
 
     this.lists$.forEach(a => {
       this.myPieChart.data.datasets[0].data[0] = 0;

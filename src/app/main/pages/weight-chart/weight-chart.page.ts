@@ -25,8 +25,6 @@ export class WeightChartPage extends BaseChartPage {
   }
 
   async ngOnInit(): Promise<void> {
-    // this.splitMin = 80.5;
-    // this.splitMax = 81;
     this.measure = "Kg";
     await this.loadData();
     this.changeType("0");
@@ -57,16 +55,16 @@ export class WeightChartPage extends BaseChartPage {
     this.myBarChart = this.createChart('bar', this.viewBarChart);
     this.prepareBarChart(10);
     this.showBar = true;
-    this.subTitle = "Bar Chart";
-    this.title = "Last 10 weight tests";
+    this.subTitle = "chart.bar.subTitle";
+    this.title = "chart.bar.title";
   }
 
   private createPieChart() {
     this.myPieChart = this.createChart('pie', this.viewPieChart);
     this.preparePieChart();
     this.showPie = true;
-    this.subTitle = "Pie Chart";
-    this.title = "Weight tests count per group";
+    this.subTitle = "chart.pie.subTitle";
+    this.title = "chart.pie.title";
   }
 
 }

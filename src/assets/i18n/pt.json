@@ -4,8 +4,8 @@
   "no-list": "Sem itens cadastrados...",
   "chart": {
     "select": "Selecione o Tipo de Gráfico",
-    "bar": "Barra",
-    "pie": "Pizza"
+    "bar": { "name": "Barra", "title": "Últimas 10 medições", "subTitle": "Gráfico Barra" },
+    "pie": { "name": "Pizza", "title": "Número de testes por grupo", "subTitle": "Gráfico Pizza" }
   },
   "weight": {
     "title": "Medições de Peso",
@@ -34,6 +34,9 @@
     "signup": "Registrar",
     "exists": "Já possuo uma conta",
     "new": "Criar conta",
-    "facebook": "Entrar com o Facebook"
+    "facebook": "Entrar com o Facebook",
+    "logout": "Deseja realmente sair?",
+    "yes": "Sim",
+    "no": "Não"
   }
 }
