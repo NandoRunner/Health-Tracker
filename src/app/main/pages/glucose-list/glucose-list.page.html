@@ -13,12 +13,12 @@
       <ion-label>mg/dL</ion-label>
     </ion-item>
     <ng-container *ngIf="lists.length > 0; else noTasks">
-      <app-glucose-item
+      <app-base-item
         *ngFor="let list of lists"
         [item]="list"
         (update)="onUpdate($event)"
         (delete)="onDelete($event)"
-      ></app-glucose-item>
+      ></app-base-item>
     </ng-container>
     <ng-template #noTasks>
       <ion-item lines="none">{{ "no-list" | translate }}</ion-item>

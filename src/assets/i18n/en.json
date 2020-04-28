@@ -1,5 +1,9 @@
 {
   "save": "Save",
+  "page": {
+    "saving": "Saving...",
+    "errorSaving": "Error saving "
+  },
   "no-list": "No List yet...",
   "date": "Date",
   "chart": {

@@ -1,5 +1,9 @@
 {
   "save": "Salvar",
+  "page": {
+    "saving": "Salvando...",
+    "errorSaving": "Erro salvando "
+  },
   "date": "Data",
   "no-list": "Sem itens cadastrados...",
   "chart": {

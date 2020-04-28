@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  CURRENT_VERSION: "0.20.15",
+  CURRENT_VERSION: "0.20.18",
   firebase: {
     apiKey: "AIzaSyB0KkQebdbp_5qR36trCWFt2yNh2JJHs-U",
     authDomain: "health-tracker-fandrade.firebaseapp.com",

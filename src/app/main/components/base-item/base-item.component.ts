@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 
-import { Weight } from '../../models/weight.model';
+import { BaseModel } from '../../models/base.model';
 
 @Component({
   selector: 'app-base-item',
@@ -9,8 +9,8 @@ import { Weight } from '../../models/weight.model';
 })
 export class BaseItemComponent {
 
-  @Input() item: Weight;
-  @Output() update = new EventEmitter<Weight>();
-  @Output() delete = new EventEmitter<Weight>();
+  @Input() item: BaseModel;
+  @Output() update = new EventEmitter<BaseModel>();
+  @Output() delete = new EventEmitter<BaseModel>();
 
 }

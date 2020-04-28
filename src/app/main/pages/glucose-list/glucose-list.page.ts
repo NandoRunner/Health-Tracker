@@ -31,6 +31,7 @@ export class GlucoseListPage implements OnInit {
   }
 
   onUpdate(o: Glucose): void {
+    console.log(o);
     this.navCtrl.navigateForward(['glucoses', 'edit', o.id]);
   }
 
