@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { BloodPressureService } from '../../services/blood-pressure.service';
+import { PageModel } from '../../models/page.model';
 
 @Component({
   selector: 'app-blood-pressure-save',
@@ -13,10 +14,11 @@ import { BloodPressureService } from '../../services/blood-pressure.service';
   styleUrls: ['./blood-pressure-save.page.scss'],
 })
 export class BloodPressureSavePage implements OnInit {
-  formGroup: FormGroup;
   myDate: Date = new Date();
   pageTitle = '...';
-  listId: string = undefined;
+  formGroup: FormGroup;
+  protected page: PageModel = new PageModel();
+  private baseId: string = undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -24,7 +26,13 @@ export class BloodPressureSavePage implements OnInit {
     private overlayService: OverlayService,
     private route: ActivatedRoute,
     private service: BloodPressureService
-  ) {}
+  ) {
+    this.page.titleNew = 'blood-pressure.new';
+    this.page.titleEdit = 'blood-pressure.edit';
+    this.page.saving = 'Saving...';
+    this.page.error = 'Error saving Blood Pressure: ';
+    this.page.navBack = '/bloodpressures';
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -32,18 +40,19 @@ export class BloodPressureSavePage implements OnInit {
   }
 
   init(): void {
-    const listId = this.route.snapshot.paramMap.get('id');
-    if (!listId) {
+    const itemId = this.route.snapshot.paramMap.get('id');
+    if (!itemId) {
       this.pageTitle = 'blood-pressure.new';
       return;
     }
-    this.listId = listId;
+    this.baseId = itemId;
     this.pageTitle = 'blood-pressure.edit';
     this.service
-      .get(listId)
+      .get(itemId)
       .pipe(take(1))
       .subscribe(({ date, valueMax, valueMin, heartRate }) => {
-        this.formGroup.get('date').setValue(date);
+        this.formGroup.get('id').setValue(itemId);
+        this.formGroup.get('date').setValue(date.toDate().toISOString());
         this.formGroup.get('valueMax').setValue(valueMax);
         this.formGroup.get('valueMin').setValue(valueMin);
         this.formGroup.get('heartRate').setValue(heartRate);
@@ -62,20 +71,21 @@ export class BloodPressureSavePage implements OnInit {
 
   async onSubmit(): Promise<void> {
     this.formGroup.get('date').setValue(this.myDate);
+
     const loading = await this.overlayService.loading({
-      message: 'Saving...'
+      message: this.page.saving
     });
     try {
-      const list = !this.listId
+      const item = !this.baseId
         ? await this.service.create(this.formGroup.value)
         : await this.service.update({
-            id: this.listId,
+            id: this.baseId,
             ...this.formGroup.value
           });
-      this.service.deleteFieldId(list.id);
-      this.navCtrl.navigateBack('/bloodpressures');
+      this.service.deleteFieldId(item.id);
+      this.navCtrl.navigateBack(this.page.navBack);
     } catch (error) {
-      console.log('Error saving Blood Pressure: ', error);
+      console.log(this.page.error, error);
       await this.overlayService.toast({
         message: error.message
       });
@@ -85,7 +95,7 @@ export class BloodPressureSavePage implements OnInit {
   }
 
   ionViewDidEnter(): void {
-    this.formGroup.get('date').setValue(this.myDate);
+    this.formGroup.get('date').setValue(this.myDate.toISOString());
   }
 
   changeDate(selectedValue: any): void {

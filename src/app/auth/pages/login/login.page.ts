@@ -7,14 +7,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthProvider } from 'src/app/core/services/auth.types';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-
   authForm: FormGroup;
   authProviders = AuthProvider;
   configs = {
@@ -37,8 +35,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
-    this.myVersion = "123"; 
+    this.myVersion = "0.20.x"; 
     this.myName = "Health Tracker";
     this.createForm();
   }

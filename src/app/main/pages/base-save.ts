@@ -18,7 +18,9 @@ export class BasePage implements OnInit {
       protected navCtrl: NavController,
       protected overlayService: OverlayService,
       protected service: BaseService
-    ) { }
+    ) {
+
+     }
   
     ngOnInit(): void { }
   
@@ -56,13 +58,13 @@ export class BasePage implements OnInit {
         message: this.page.saving
       });
       try {
-        const list = !this.baseId
+        const item = !this.baseId
           ? await this.service.create(this.formGroup.value)
           : await this.service.update({
               id: this.baseId,
               ...this.formGroup.value
             });
-        this.service.deleteFieldId(list.id);
+        this.service.deleteFieldId(item.id);
         this.navCtrl.navigateBack(this.page.navBack);
       } catch (error) {
         console.log(this.page.error, error);

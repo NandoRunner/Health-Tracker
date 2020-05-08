@@ -14,4 +14,3 @@ export class WeightService extends BaseService {
     this.init();
   }
 }
-  

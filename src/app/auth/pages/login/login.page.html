@@ -1,14 +1,12 @@
 <ion-content class="ion-padding">
-
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col
         size-sm="8"
         size-md="4"
         size-lg="3"
-        size-xl="3"
-      >
- 
+        size-xl="3">
+      <ion-note>{{ myName }} - {{ myVersion }}</ion-note>
         <h1 class="ion-text-center">
           <ion-icon
             name="pulse"
@@ -16,12 +14,10 @@
             class="llogo"
           ></ion-icon>
         </h1>
-
         <form
           [formGroup]="authForm"
           (submit)="onSubmit(authProviders.Email)"
         >
-
           <ng-container *ngIf="!configs.isSignIn">
             <ion-item>
               <ion-icon
