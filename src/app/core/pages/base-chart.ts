@@ -19,11 +19,11 @@ export class BaseChartPage implements OnInit {
 
   protected myPieChart: any;
   protected myBarChart: any;
-  
   protected chartType: any;
   protected splitMin: number;
   protected splitMax: number;
   protected measure: string;
+  protected isGroup: boolean;
 
   loading: HTMLIonLoadingElement;
 
@@ -31,15 +31,15 @@ export class BaseChartPage implements OnInit {
 
   protected constructor(
   ) {
-    this.listColors = ['rgb(0, 150, 0)', 'rgb(0, 0, 150)', 'rgb(150, 0, 0)']; 
+    this.listColors = ['rgb(0, 150, 0)', 'rgb(0, 0, 150)', 'rgb(150, 0, 0)'];
   }
 
   ngOnInit() {
   }
 
-  protected createChart(chartType: String, view: any) : Chart {
+  protected createChart(chartType: String, view: any): Chart {
     return new Chart(view.nativeElement, {
-      type: chartType, 
+      type: chartType,
       data: {
         labels: [],
         datasets: [{
@@ -63,8 +63,7 @@ export class BaseChartPage implements OnInit {
     });
   }
 
-  protected prepareSplitGroups()
-  {
+  protected prepareSplitGroups() {
     let min = 0;
     let max = 0;
     let primeiro = true;
@@ -93,7 +92,7 @@ export class BaseChartPage implements OnInit {
     });
   }
 
-  protected preparePieChart() {
+  protected prepareGroupPieChart() {
     this.myPieChart.data.datasets[0].label = this.measure;
     this.myPieChart.options.legend.labels.boxWidth = 8;
 
@@ -102,8 +101,8 @@ export class BaseChartPage implements OnInit {
       this.myPieChart.data.datasets[0].data[1] = 0;
       this.myPieChart.data.datasets[0].data[2] = 0;
       a.forEach(b => {
-        this.myPieChart.data.datasets[0].data[this.getIndexValue(b.value)] += 1;  
-        });
+        this.myPieChart.data.datasets[0].data[this.getIndexValue(b.value)] += 1;
+      });
     });
     var i = 0;
 
@@ -114,15 +113,30 @@ export class BaseChartPage implements OnInit {
     }
   }
 
+  protected preparePieChart() {
+    this.myPieChart.data.datasets[0].label = this.measure;
+    this.myPieChart.options.legend.labels.boxWidth = 8;
+
+    this.lists$.forEach(a => {
+      var i = 0;
+      a.forEach(b => {
+        this.myPieChart.data.labels[i] = b.name;
+        this.myPieChart.data.datasets[0].backgroundColor[i] = b.color;
+        this.myPieChart.data.datasets[0].data[i++] = b.value;
+        this.myPieChart.update();
+      });
+    });
+  }
+
   protected prepareBarChart(maxItems: number) {
     this.myBarChart.data.datasets[0].label = this.measure;
-    
+
     var i = 0;
     this.lists$.forEach(a => {
       a.forEach(b => {
-        if (i < maxItems) {
-          this.myBarChart.data.labels[i] = b.date.toDate().toLocaleString().split(' ')[0];
-          this.myBarChart.data.datasets[0].backgroundColor[i] =  this.listColors[this.getIndexValue(b.value)];
+        if (i < maxItems || maxItems == 0) {
+          this.myBarChart.data.labels[i] = b.name;
+          this.myBarChart.data.datasets[0].backgroundColor[i] = (b.color === "" ? this.listColors[this.getIndexValue(b.value)] : b.color);
           this.myBarChart.data.datasets[0].data[i++] = b.value;
           this.myBarChart.update();
         }
@@ -130,13 +144,40 @@ export class BaseChartPage implements OnInit {
     });
     this.myBarChart.update();
   }
-  
-  private getIndexValue(value: number) : number{
+
+  protected getIndexValue(value: number): number {
     if (value < this.splitMin)
       return 0;
     else if (value >= this.splitMax)
       return 2;
     else
-    return 1;
+      return 1;
+  }
+
+  protected createBarChart(results: number) {
+    this.myBarChart = this.createChart('bar', this.viewBarChart);
+    if (this.splitMin === this.splitMax) this.prepareSplitGroups();
+    this.prepareBarChart(results);
+    this.showBar = true;
+    this.subTitle = "chart.bar.subTitle";
+    this.title = "chart.bar.title";
+  }
+
+  protected createPieChart() {
+    this.myPieChart = this.createChart('pie', this.viewPieChart);
+    if (this.splitMin === this.splitMax) this.prepareSplitGroups();
+    if (this.isGroup) {
+    this.listLabels = [`< ${this.splitMin} ${this.measure}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure}`, `>= ${this.splitMax} ${this.measure}`];
+    this.prepareGroupPieChart();
+    }
+    else {
+       this.preparePieChart();
+    }
+    this.showPie = true;
+    this.subTitle = "chart.pie.subTitle";
+    this.title = "chart.pie.title";
+    //todo: by Expense / by Categoy / by Item
+    // period: month / week / year
+    // sum(value) / avg(value) / count / avg count 
   }
 }

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  CURRENT_VERSION: "0.20.20",
+  CURRENT_VERSION: "0.20.22",
+  icon: "pulse",
+  init_page: "weights",  
   firebase: {
     apiKey: "AIzaSyB0KkQebdbp_5qR36trCWFt2yNh2JJHs-U",
     authDomain: "health-tracker-fandrade.firebaseapp.com",

@@ -1,6 +1,6 @@
 {
 	"name": "health-tracker",
-	"version": "0.20.20",
+	"version": "0.20.22",
 	"author": "NandoRunner",
 	"homepage": "https://github.com/NandoRunner/Health-Tracker",
 	"scripts": {

@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthProvider } from 'src/app/core/services/auth.types';
 import { OverlayService } from 'src/app/core/services/overlay.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +21,12 @@ export class LoginPage implements OnInit {
     action: 'login.login',
     actionChange: 'login.new'
   };
+  myVersion: string;
+  myProject: string;
+  myIcon: string;
 
   private nameControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
-  public myVersion: string;
-  public myName: string;
 
   constructor(
     private authService: AuthService,
@@ -32,11 +34,13 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private overlayService: OverlayService
-  ) {}
+  ) {
+    this.myVersion = environment.CURRENT_VERSION;
+    this.myProject = environment.firebase.projectId;
+    this.myIcon = environment.icon;
+  }
 
   ngOnInit(): void {
-    this.myVersion = "0.20.x"; 
-    this.myName = "Health Tracker";
     this.createForm();
   }
 
@@ -78,7 +82,7 @@ export class LoginPage implements OnInit {
         provider
       });
       this.navCtrl.navigateForward(
-        this.route.snapshot.queryParamMap.get('redirect') || '/weights'
+        this.route.snapshot.queryParamMap.get('redirect') || `/${environment.init_page}`
       );
     } catch (e) {
       console.log('Auth error: ', e);
