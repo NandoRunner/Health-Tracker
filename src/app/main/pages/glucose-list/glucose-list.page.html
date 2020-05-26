@@ -11,11 +11,13 @@
       <ion-item color="secondary">
       <ion-label>{{ "date" | translate }}</ion-label>
       <ion-label>mg/dL</ion-label>
+      <ion-label>Jejum aproximado</ion-label>
     </ion-item>
     <ng-container *ngIf="lists.length > 0; else noTasks">
       <app-base-item
         *ngFor="let list of lists"
         [item]="list"
+        [values]="2"
         (update)="onUpdate($event)"
         (delete)="onDelete($event)"
       ></app-base-item>

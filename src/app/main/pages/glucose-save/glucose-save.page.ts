@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { GlucoseService } from '../../services/glucose.service';
 import { BasePage } from '../base-save';
 import { TranslateService } from '@ngx-translate/core';
+import { Glucose } from '../../models/glucose.model';
 
 @Component({
   selector: 'app-glucose-save',
@@ -13,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./glucose-save.page.scss'],
 })
 
-export class GlucoseSavePage extends BasePage {
+export class GlucoseSavePage extends BasePage<Glucose> {
 
   constructor(
     protected fb: FormBuilder,
@@ -38,6 +39,10 @@ export class GlucoseSavePage extends BasePage {
 
   ngOnInit(): void {
     this.createForm();
+
+    this.formGroup.addControl('value2', this.fb.control('', [Validators.min(1), Validators.max(16)]));
+
     this.init(this.route.snapshot.paramMap.get('id'));
   }
+ 
 }

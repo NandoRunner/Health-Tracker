@@ -9,7 +9,8 @@ import { BaseModel } from '../../models/base.model';
 })
 export class BaseItemComponent {
 
-  @Input() item: BaseModel;
+  @Input() item: any;
+  @Input() values: number;
   @Output() update = new EventEmitter<BaseModel>();
   @Output() delete = new EventEmitter<BaseModel>();
 

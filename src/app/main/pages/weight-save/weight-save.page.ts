@@ -5,13 +5,14 @@ import { NavController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { WeightService } from '../../services/weight.service';
 import { BasePage } from '../base-save';
+import { Weight } from '../../models/weight.model';
 
 @Component({
   selector: 'app-weight-save',
   templateUrl: './weight-save.page.html',
   styleUrls: ['./weight-save.page.scss'],
 })
-export class WeightSavePage extends BasePage {
+export class WeightSavePage extends BasePage<Weight> {
 
   constructor(
     protected fb: FormBuilder,

@@ -5,8 +5,10 @@ import { take } from 'rxjs/operators';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { PageModel } from '../models/page.model';
 import { BaseService } from '../services/base.service';
+import { BaseModel } from '../models/base.model';
 
-export class BasePage implements OnInit {
+export class BasePage<T> implements OnInit {
+    
     myDate: Date = new Date();
     pageTitle = '...';
     formGroup: FormGroup;
@@ -17,10 +19,8 @@ export class BasePage implements OnInit {
       protected fb: FormBuilder,
       protected navCtrl: NavController,
       protected overlayService: OverlayService,
-      protected service: BaseService
-    ) {
-
-     }
+      protected service: any
+    ) {}
   
     ngOnInit(): void { }
   
@@ -35,10 +35,11 @@ export class BasePage implements OnInit {
       this.service
         .get(itemId)
         .pipe(take(1))
-        .subscribe(({ date, value }) => {
+        .subscribe(({ date, value, value2 }) => {
           this.formGroup.get('id').setValue(itemId);
           this.formGroup.get('date').setValue(date.toDate().toISOString());
           this.formGroup.get('value').setValue(value);
+          this.formGroup.get('value2').setValue(value2);
         });
     }
   
@@ -84,4 +85,3 @@ export class BasePage implements OnInit {
       this.myDate = new Date(selectedValue);
     }
   }
-  

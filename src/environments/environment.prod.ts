@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  CURRENT_VERSION: "0.20.22",
+  CURRENT_VERSION: "0.20.23",
   icon: "pulse",
   init_page: "weights", 
     firebase: {

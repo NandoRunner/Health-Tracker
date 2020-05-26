@@ -7,7 +7,7 @@ import { BaseModel } from '../models/base.model';
 @Injectable({
   providedIn: 'root'
 })
-export class BaseService extends Firestore<BaseModel> {
+export class BaseService<T extends { id: string }> extends Firestore<T> {
 
   collectionName: string;
 
