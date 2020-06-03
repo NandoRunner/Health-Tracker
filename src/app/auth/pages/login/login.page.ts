@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
     private overlayService: OverlayService
   ) {
     this.myVersion = environment.CURRENT_VERSION;
-    this.myProject = environment.firebase.projectId;
+    this.myProject = environment.hostingName;
     this.myIcon = environment.icon;
   }
 

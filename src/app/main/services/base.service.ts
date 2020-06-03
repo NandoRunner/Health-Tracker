@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Firestore } from 'src/app/core/classes/firestore.class';
-import { BaseModel } from '../models/base.model';
+
+import { FireBoost } from 'fireboost';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ export class BaseService<T extends { id: string }> extends Firestore<T> {
 
   constructor(private authService: AuthService, db: AngularFirestore) {
     super(db);
+
+    console.log('BaseService constructor');
+   
     //this.init();
   }
 

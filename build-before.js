@@ -1,8 +1,10 @@
 const fs = require('fs');
 
-module.exports = function(ctx) {
+//module.exports = function(ctx) {
 
-    if (ctx.build && ctx.build.configuration && ctx.build.configuration === "production") {
+    //console.log(ctx.build);
+
+    //if (ctx.build && ctx.build.configuration && ctx.build.configuration === "production") {
 
         console.log("production build: performing version bump...");
 
@@ -29,6 +31,6 @@ module.exports = function(ctx) {
         fs.writeFileSync('config.xml', configXmlData,'utf-8');
         console.log("config.xml app version updated");
 
-    };
+//    };
 
-};
+//};

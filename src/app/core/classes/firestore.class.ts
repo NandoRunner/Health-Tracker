@@ -73,4 +73,13 @@ export abstract class Firestore<T extends { id: string }> {
       id: firebase.firestore.FieldValue.delete()
     });
   }
+
+  deleteOldFields(id: string): void {
+    const remove = this.collection.doc(id).update({
+      valueMax: firebase.firestore.FieldValue.delete(),
+      valueMin: firebase.firestore.FieldValue.delete(),
+      heartRate: firebase.firestore.FieldValue.delete(),
+
+    });
+  }
 }

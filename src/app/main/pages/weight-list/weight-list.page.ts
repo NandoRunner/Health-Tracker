@@ -6,11 +6,13 @@ import { take } from 'rxjs/operators';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { WeightService } from '../../services/weight.service';
 import { Weight } from '../../models/weight.model';
+import * as admin from 'firebase-admin';
+import { FireBoost } from 'fireboost';
 
 @Component({
   selector: 'app-weight-list',
   templateUrl: './weight-list.page.html',
-  styleUrls: ['./weight-list.page.scss'],
+  styleUrls: ['../green.page.scss'],
 })
 export class WeightListPage implements OnInit {
   public title: string;
@@ -28,6 +30,7 @@ export class WeightListPage implements OnInit {
     const loading = await this.overlayService.loading();
     this.lists$ = this.service.getAll();
     this.lists$.pipe(take(1)).subscribe(lists => loading.dismiss());
+
   }
 
   onUpdate(o: Weight): void {

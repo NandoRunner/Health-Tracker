@@ -1,36 +1,35 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/services/overlay.service';
+import { BaseSavePage } from '../base-save.page';
+import { TranslateService } from '@ngx-translate/core';
 import { WeightService } from '../../services/weight.service';
-import { BasePage } from '../base-save';
 import { Weight } from '../../models/weight.model';
+
 
 @Component({
   selector: 'app-weight-save',
   templateUrl: './weight-save.page.html',
-  styleUrls: ['./weight-save.page.scss'],
+  styleUrls: ['../green.page.scss'],
 })
-export class WeightSavePage extends BasePage<Weight> {
+export class WeightSavePage extends BaseSavePage<Weight> {
 
   constructor(
     protected fb: FormBuilder,
     protected navCtrl: NavController,
     protected overlayService: OverlayService,
     protected route: ActivatedRoute,
-    protected service: WeightService
+    protected service: WeightService,
+    protected translate: TranslateService
   ) {
-       super(fb, navCtrl, overlayService, service);
-       this.page.titleNew = 'weight.new';
-       this.page.titleEdit = 'weight.edit';
-       this.page.saving = 'Saving...';
-       this.page.error = 'Error saving Weight: ';
-       this.page.navBack = '/weights';
+    super(fb, navCtrl, overlayService, service, translate, 'weight');
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.formGroup.addControl('value', this.fb.control('', [Validators.min(1), Validators.max(200)]));
     this.init(this.route.snapshot.paramMap.get('id'));
   }
 }

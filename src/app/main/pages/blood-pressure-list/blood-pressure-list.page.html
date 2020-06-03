@@ -15,12 +15,13 @@
       <ion-label>{{ "blood-pressure.hr" | translate }}</ion-label>
     </ion-item>
     <ng-container *ngIf="lists.length > 0; else noItems">
-      <app-blood-pressure-item
+      <app-base-item
         *ngFor="let list of lists"
         [item]="list"
+        [values]="3"
         (update)="onUpdate($event)"
         (delete)="onDelete($event)"
-      ></app-blood-pressure-item>
+      ></app-base-item>
     </ng-container>
     <ng-template #noItems>
       <ion-item lines="none">{{ "no-list" | translate }}</ion-item>

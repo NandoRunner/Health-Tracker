@@ -1,15 +1,18 @@
 {
 	"name": "health-tracker",
-	"version": "0.20.23",
+	"version": "0.20.24",
 	"author": "NandoRunner",
-	"homepage": "https://github.com/NandoRunner/Health-Tracker",
+	"homepage": "",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
 		"build": "ng build",
+		"build-prod": "ng build --prod",
 		"test": "ng test",
 		"lint": "ng lint",
-		"e2e": "ng e2e"
+		"e2e": "ng e2e",
+		"before-build": "node build-before.js",
+		"bb": "npm-run-all -s before-build build-prod"
 	},
 	"private": true,
 	"dependencies": {
@@ -39,6 +42,8 @@
 		"cordova-plugin-globalization": "^1.11.0",
 		"core-js": "^2.5.4",
 		"firebase": "^7.11.0",
+		"fireboost": "^1.0.2",
+		"npm-run-all": "^4.1.5",
 		"rxjs": "^6.5.5",
 		"tslib": "^1.9.0",
 		"zone.js": "~0.9.1"

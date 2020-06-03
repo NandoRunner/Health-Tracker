@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/glucoses"></ion-back-button>
     </ion-buttons>
@@ -10,8 +10,8 @@
 
 <ion-content class="ion-padding">
   <form [formGroup]="formGroup" (submit)="onSubmit()">
-    <ion-item>
-      <ion-icon name="water" slot="start" color="primary"></ion-icon>
+    <ion-item color="light">
+      <ion-icon name="water" slot="start" color="medium"></ion-icon>
       <ion-input
         type="number"
         placeholder="mg/dL"
@@ -21,8 +21,8 @@
       >
       </ion-input>
     </ion-item>
-    <ion-item>
-      <ion-icon name="clock" slot="start" color="primary"></ion-icon>
+    <ion-item color="light">
+      <ion-icon name="clock" slot="start" color="medium"></ion-icon>
       <ion-input
         type="number"
         placeholder="Jejum aproximado em horas"
@@ -33,8 +33,8 @@
       </ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+    <ion-item color="light">
+      <ion-icon name="calendar" slot="start" color="medium"></ion-icon>
       <ion-datetime
         (ionChange)="changeDate($event.detail.value)"
         displayFormat="DD/MM/YYYY"

@@ -10,7 +10,7 @@ import { Glucose } from '../../models/glucose.model';
 @Component({
   selector: 'app-glucose-list',
   templateUrl: './glucose-list.page.html',
-  styleUrls: ['./glucose-list.page.scss']
+  styleUrls: ['../orange.page.scss']
 })
 export class GlucoseListPage implements OnInit {
   public title: string;

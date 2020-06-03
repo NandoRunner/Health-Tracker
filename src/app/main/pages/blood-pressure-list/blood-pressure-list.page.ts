@@ -29,7 +29,7 @@ export class BloodPressureListPage implements OnInit {
   }
 
   onUpdate(o: BloodPressure): void {
-    this.navCtrl.navigateForward(['bloodpressures', 'edit', o.id]);
+    this.navCtrl.navigateForward(['blood-pressures', 'edit', o.id]);
   }
 
   async onDelete(o: BloodPressure): Promise<void> {

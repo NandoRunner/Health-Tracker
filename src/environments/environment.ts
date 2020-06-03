@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  CURRENT_VERSION: "0.20.23",
+  CURRENT_VERSION: "0.20.24",
+  hostingName: "Health Tracker",
   icon: "pulse",
   init_page: "weights",  
   firebase: {

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <app-menu-toggle slot="start" menu="main-menu"></app-menu-toggle>
     <ion-title>{{ "glucose.title" | translate }} </ion-title>
     <app-logout-button slot="end" menu="main-menu"></app-logout-button>
@@ -8,10 +8,10 @@
 
 <ion-content class="ion-padding">
   <ion-list *ngIf="lists$ | async as lists">
-      <ion-item color="secondary">
+      <ion-item>
       <ion-label>{{ "date" | translate }}</ion-label>
       <ion-label>mg/dL</ion-label>
-      <ion-label>Jejum aproximado</ion-label>
+      <ion-label>Jejum aproximado (h)</ion-label>
     </ion-item>
     <ng-container *ngIf="lists.length > 0; else noTasks">
       <app-base-item

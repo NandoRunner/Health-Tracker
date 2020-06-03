@@ -28,7 +28,7 @@ export class AppComponent {
   initializeApp() {
     this.pages = [
       { url: '/glucoses', direction: 'back', icon: 'checkmark', text: 'glucose.menu' },
-      { url: '/bloodpressures', direction: 'back', icon: 'checkmark', text: 'blood-pressure.menu' },
+      { url: '/blood-pressures', direction: 'back', icon: 'checkmark', text: 'blood-pressure.menu' },
       { url: '/weights', direction: 'back', icon: 'checkmark', text: 'weight.menu' }
     ];
 

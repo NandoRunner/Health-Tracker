@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './auth/auth.module#AuthModule' },
   { path: 'glucoses', loadChildren: './main/glucoses.module#GlucosesModule', canLoad: [AuthGuard] },
   {
-    path: 'bloodpressures',
+    path: 'blood-pressures',
     loadChildren: './main/blood-pressures.module#BloodPressuresModule',
     canLoad: [AuthGuard]
   },
