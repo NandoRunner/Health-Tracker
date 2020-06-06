@@ -1,12 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/glucoses"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ pageTitle | translate}}</ion-title>
-    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
-  </ion-toolbar>
-</ion-header>
+<app-base-header [title]="pageTitle" [isSave]=true [cssName]="'orange'">
+</app-base-header>
 
 <ion-content class="ion-padding">
   <form [formGroup]="formGroup" (submit)="onSubmit()">
@@ -21,6 +14,7 @@
       >
       </ion-input>
     </ion-item>
+
     <ion-item color="light">
       <ion-icon name="clock" slot="start" color="medium"></ion-icon>
       <ion-input
@@ -41,6 +35,7 @@
         formControlName="date"
       ></ion-datetime>
     </ion-item>
+
     <ion-button expand="full" type="submit" [disabled]="formGroup.invalid">
       {{'save' | translate}}
     </ion-button>

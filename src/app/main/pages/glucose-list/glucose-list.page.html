@@ -1,10 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <app-menu-toggle slot="start" menu="main-menu"></app-menu-toggle>
-    <ion-title>{{ "glucose.title" | translate }} </ion-title>
-    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
-  </ion-toolbar>
-</ion-header>
+<app-base-header [title]="'glucose.title'" [isSave]=false [cssName]="'orange'">
+</app-base-header>
 
 <ion-content class="ion-padding">
   <ion-list *ngIf="lists$ | async as lists">

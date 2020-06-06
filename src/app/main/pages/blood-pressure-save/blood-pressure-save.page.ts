@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component  } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/services/overlay.service';
@@ -11,7 +11,7 @@ import { BloodPressure } from '../../models/bloodpressure.model';
 @Component({
   selector: 'app-blood-pressure-save',
   templateUrl: './blood-pressure-save.page.html',
-  styleUrls: ['./blood-pressure-save.page.scss'],
+  styleUrls: ['../blue.page.scss']
 })
 export class BloodPressureSavePage extends BaseSavePage<BloodPressure> {
 
@@ -31,7 +31,6 @@ export class BloodPressureSavePage extends BaseSavePage<BloodPressure> {
     this.formGroup.addControl('value', this.fb.control('', [Validators.min(1), Validators.max(250)]));
     this.formGroup.addControl('value2', this.fb.control('', [Validators.min(1), Validators.max(150)]));
     this.formGroup.addControl('value3', this.fb.control('', [Validators.min(1), Validators.max(250)]));
-    this.formGroup.addControl('valueMax', this.fb.control('', [Validators.min(1), Validators.max(25)]));
     this.init(this.route.snapshot.paramMap.get('id'));
   }
 }

@@ -6,8 +6,6 @@ import { take } from 'rxjs/operators';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { WeightService } from '../../services/weight.service';
 import { Weight } from '../../models/weight.model';
-import * as admin from 'firebase-admin';
-import { FireBoost } from 'fireboost';
 
 @Component({
   selector: 'app-weight-list',

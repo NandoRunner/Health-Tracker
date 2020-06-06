@@ -1,14 +1,9 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <app-menu-toggle slot="start" menu="main-menu"></app-menu-toggle>
-    <ion-title>{{ "blood-pressure.title" | translate }}</ion-title>
-    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
-  </ion-toolbar>
-</ion-header>
+<app-base-header [title]="'blood-pressure.title'" [isSave]=false [cssName]="'blue'">
+</app-base-header>
 
 <ion-content class="ion-padding">
   <ion-list *ngIf="lists$ | async as lists">
-    <ion-item color="secondary">
+    <ion-item>
       <ion-label>{{ "date" | translate }}</ion-label>
       <ion-label>Max (mmHg)</ion-label>
       <ion-label>Min (mmHg)</ion-label>
@@ -28,7 +23,7 @@
     </ng-template>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/bloodpressures/create" routerDirection="forward">
+    <ion-fab-button routerLink="/blood-pressures/create" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

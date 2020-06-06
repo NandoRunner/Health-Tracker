@@ -11,7 +11,7 @@ import { BloodPressureService } from '../../services/blood-pressure.service';
 @Component({
   selector: 'app-blood-pressure-list',
   templateUrl: './blood-pressure-list.page.html',
-  styleUrls: ['./blood-pressure-list.page.scss']
+  styleUrls: ['../blue.page.scss'],
 })
 export class BloodPressureListPage implements OnInit {
   lists$: Observable<BloodPressure[]>;

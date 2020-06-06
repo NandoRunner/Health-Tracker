@@ -1,0 +1,17 @@
+<ion-header class="{{ cssName }}">
+  <ion-toolbar>
+    <ng-container *ngIf="!isSave">
+      <app-menu-toggle slot="start" menu="main-menu"></app-menu-toggle>
+    </ng-container>
+
+    <ng-container *ngIf="isSave">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref=""></ion-back-button>
+      </ion-buttons>
+    </ng-container>
+
+    <ion-title>{{ title | translate }} </ion-title>
+    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
+  </ion-toolbar>
+</ion-header>
+
