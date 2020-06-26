@@ -2,21 +2,21 @@
 </app-base-header>
 
 <ion-content class="ion-padding">
-  <ion-list *ngIf="lists$ | async as lists">
+  <ion-list *ngIf="list$ | async as list">
       <ion-item>
       <ion-label>{{ "date" | translate }}</ion-label>
       <ion-label>Kg</ion-label>
     </ion-item>
-    <ng-container *ngIf="lists.length > 0; else noTasks">
+    <ng-container *ngIf="list.length > 0; else noItems">
       <app-base-item
-        *ngFor="let list of lists"
-        [item]="list"
+        *ngFor="let item of list"
+        [item]="item"
         [values]="1"
         (update)="onUpdate($event)"
         (delete)="onDelete($event)"
       ></app-base-item>
     </ng-container>
-    <ng-template #noTasks>
+    <ng-template #noItems>
       <ion-item lines="none">{{ "no-list" | translate }}</ion-item>
     </ng-template>
   </ion-list>

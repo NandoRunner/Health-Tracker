@@ -1,6 +1,7 @@
 import { OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chart } from 'chart.js';
+import { ProjectType } from '../models/projectType.enum';
 
 export class BaseChartPage implements OnInit {
 
@@ -10,12 +11,16 @@ export class BaseChartPage implements OnInit {
 
   public showPie: boolean = false;
   public showBar: boolean = true;
+  public showPie2: boolean = false;
+  public showBar2: boolean = false;
 
   protected listColors: string[];
   protected listLabels: string[];
 
   @ViewChild('viewPieChart', null) viewPieChart;
   @ViewChild('viewBarChart', null) viewBarChart;
+  @ViewChild('viewPieChart2', null) viewPieChart2;
+  @ViewChild('viewBarChart2', null) viewBarChart2;
 
   protected myPieChart: any;
   protected myBarChart: any;
@@ -28,6 +33,9 @@ export class BaseChartPage implements OnInit {
   loading: HTMLIonLoadingElement;
 
   protected lists$: Observable<any>;
+
+  protected projectType: number = ProjectType.healthTracker;
+  protected valueType: number = 1;
 
   protected constructor(
   ) {
@@ -70,18 +78,21 @@ export class BaseChartPage implements OnInit {
 
     this.lists$.forEach(a => {
       a.forEach(b => {
+
+        var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
+
         //console.log(b.value);
         if (primeiro) {
-          min = b.value;
-          max = b.value;
+          min = val;
+          max = val;
           primeiro = false;
         }
 
-        if (b.value > max) {
-          max = b.value;
+        if (val > max) {
+          max = val;
         }
-        else if (b.value < min) {
-          min = b.value;
+        else if (val < min) {
+          min = val;
         }
       });
       let dif = max - min;
@@ -101,7 +112,9 @@ export class BaseChartPage implements OnInit {
       this.myPieChart.data.datasets[0].data[1] = 0;
       this.myPieChart.data.datasets[0].data[2] = 0;
       a.forEach(b => {
-        this.myPieChart.data.datasets[0].data[this.getIndexValue(b.value)] += 1;
+        var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
+
+        this.myPieChart.data.datasets[0].data[this.getIndexValue(val)] += 1;
       });
     });
     var i = 0;
@@ -120,9 +133,11 @@ export class BaseChartPage implements OnInit {
     this.lists$.forEach(a => {
       var i = 0;
       a.forEach(b => {
+        var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
+
         this.myPieChart.data.labels[i] = b.name;
         this.myPieChart.data.datasets[0].backgroundColor[i] = b.color;
-        this.myPieChart.data.datasets[0].data[i++] = b.value;
+        this.myPieChart.data.datasets[0].data[i++] = val;
         this.myPieChart.update();
       });
     });
@@ -135,9 +150,11 @@ export class BaseChartPage implements OnInit {
     this.lists$.forEach(a => {
       a.forEach(b => {
         if (i < maxItems || maxItems == 0) {
+          var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
+
           this.myBarChart.data.labels[i] = b.name;
-          this.myBarChart.data.datasets[0].backgroundColor[i] = (b.color === "" ? this.listColors[this.getIndexValue(b.value)] : b.color);
-          this.myBarChart.data.datasets[0].data[i++] = b.value;
+          this.myBarChart.data.datasets[0].backgroundColor[i] = (b.color === "" ? this.listColors[this.getIndexValue(val)] : b.color);
+          this.myBarChart.data.datasets[0].data[i++] = val;
           this.myBarChart.update();
         }
       });
@@ -155,17 +172,18 @@ export class BaseChartPage implements OnInit {
   }
 
   protected createBarChart(results: number) {
-    this.myBarChart = this.createChart('bar', this.viewBarChart);
-    if (this.splitMin === this.splitMax) this.prepareSplitGroups();
+    this.myBarChart = this.createChart('bar', (this.valueType === 1 ? this.viewBarChart : this.viewBarChart2));
+    if ((this.splitMin === this.splitMax) || this.projectType === ProjectType.fixedExpenses) this.prepareSplitGroups();
     this.prepareBarChart(results);
-    this.showBar = true;
+    this.showBar = (this.valueType === 1);
+    this.showBar2 = (this.valueType === 2);
     this.subTitle = "chart.bar.subTitle";
     this.title = "chart.bar.title";
   }
 
   protected createPieChart() {
-    this.myPieChart = this.createChart('pie', this.viewPieChart);
-    if (this.splitMin === this.splitMax) this.prepareSplitGroups();
+    this.myPieChart = this.createChart('pie',  (this.valueType === 1 ? this.viewPieChart : this.viewPieChart2));
+    if ((this.splitMin === this.splitMax) || this.projectType === ProjectType.fixedExpenses) this.prepareSplitGroups();
     if (this.isGroup) {
     this.listLabels = [`< ${this.splitMin} ${this.measure}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure}`, `>= ${this.splitMax} ${this.measure}`];
     this.prepareGroupPieChart();
@@ -173,7 +191,8 @@ export class BaseChartPage implements OnInit {
     else {
        this.preparePieChart();
     }
-    this.showPie = true;
+    this.showPie = (this.valueType === 1);
+    this.showPie2 = (this.valueType === 2);
     this.subTitle = "chart.pie.subTitle";
     this.title = "chart.pie.title";
     //todo: by Expense / by Categoy / by Item

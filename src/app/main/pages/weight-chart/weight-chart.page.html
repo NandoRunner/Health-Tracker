@@ -1,13 +1,5 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/weights"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ "weight.title" | translate }} </ion-title>
-
-    <app-logout-button slot="end" menu="main-menu"></app-logout-button>
-  </ion-toolbar>
-</ion-header>
+<app-base-header [title]="'weight.title'" [isSave]=false [cssName]="'green'">
+</app-base-header>
 
 <ion-content class="ion-padding">
 

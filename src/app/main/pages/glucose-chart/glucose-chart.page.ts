@@ -12,7 +12,7 @@ import { GlucoseService } from '../../services/glucose.service';
 @Component({
   selector: 'app-glucose-chart',
   templateUrl: './glucose-chart.page.html',
-  styleUrls: ['./glucose-chart.page.scss'],
+  styleUrls: ['../orange.page.scss']
 })
 export class GlucoseChartPage extends BaseChartPage {
 

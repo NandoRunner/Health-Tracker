@@ -8,19 +8,23 @@ import { formatDate } from '@angular/common';
 import { BaseService } from '../services/base.service';
 import { BaseModel } from '../models/base.model';
 
-export class BaseListPage {
+export class BaseListPage<T> {
 
   public title: string;
   public language: string;
   public route: string;
 
-  list$: Observable<BaseModel[]>;
+  list$: Observable<any[]>;
 
   constructor(
     protected navCtrl: NavController,
     protected overlayService: OverlayService,
-    protected service: any
-  ) {}
+    protected service: any,
+    protected name: string
+  ) {
+    this.title = name.charAt(0).toUpperCase() + name.substr(1).toLowerCase();
+    this.route = name;
+  }
 
   async ngOnInit(): Promise<void> {
     const loading = await this.overlayService.loading();

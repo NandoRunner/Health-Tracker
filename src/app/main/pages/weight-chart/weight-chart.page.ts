@@ -12,7 +12,7 @@ import { WeightService } from '../../services/weight.service';
 @Component({
   selector: 'app-weight-chart',
   templateUrl: './weight-chart.page.html',
-  styleUrls: ['./weight-chart.page.scss'],
+  styleUrls: ['../green.page.scss'],
 })
 export class WeightChartPage extends BaseChartPage {
 
