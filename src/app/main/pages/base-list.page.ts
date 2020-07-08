@@ -23,7 +23,7 @@ export class BaseListPage<T> {
     protected name: string
   ) {
     this.title = name.charAt(0).toUpperCase() + name.substr(1).toLowerCase();
-    this.route = name;
+    this.route = name+'s';
   }
 
   async ngOnInit(): Promise<void> {
