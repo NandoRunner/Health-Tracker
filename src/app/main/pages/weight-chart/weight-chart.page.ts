@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BaseChartPage } from 'src/app/core/pages/base-chart';
 
 import { WeightService } from '../../services/weight.service';
+import { ProjectType } from 'src/app/core/models/projectType.enum';
 
 @Component({
   selector: 'app-weight-chart',
@@ -25,12 +26,13 @@ export class WeightChartPage extends BaseChartPage {
     super();
     this.lists$ = new Observable<MyChart[]>();
     this.isGroup = true;
+    this.projectType = ProjectType.healthTracker;
   }
 
   async ngOnInit(): Promise<void> {
     this.splitMin = 0;
     this.splitMax = 0;
-    this.measure = "Kg";
+    this.measure = ["Kg"];
     await this.loadData();
   }
 
@@ -47,6 +49,7 @@ export class WeightChartPage extends BaseChartPage {
               name: b.date.toDate().toLocaleString().split(' ')[0],
               value: b.value,
               value2: 0,
+              value3: 0,
               color: ""
             });
           });
@@ -61,6 +64,8 @@ export class WeightChartPage extends BaseChartPage {
   
   changeType(param: any) {
     this.showBar = this.showPie = false;
+
+    this.valueType = 1;
 
     if (param === "1") {
       this.createPieChart();

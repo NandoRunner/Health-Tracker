@@ -7,21 +7,21 @@ import { OverlayService } from 'src/app/core/services/overlay.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BaseChartPage } from 'src/app/core/pages/base-chart';
 
-import { GlucoseService } from '../../services/glucose.service';
+import { BloodPressureService } from '../../services/blood-pressure.service';
 import { ProjectType } from 'src/app/core/models/projectType.enum';
 
 @Component({
-  selector: 'app-glucose-chart',
-  templateUrl: './glucose-chart.page.html',
-  styleUrls: ['../orange.page.scss']
+  selector: 'app-blood-pressure-chart',
+  templateUrl: './blood-pressure-chart.page.html',
+  styleUrls: ['../blue.page.scss']
 })
-export class GlucoseChartPage extends BaseChartPage {
+export class BloodPressureChartPage extends BaseChartPage {
 
   constructor(
     private navCtrl: NavController,
     private overlayService: OverlayService,
     private authService: AuthService,
-    private service: GlucoseService
+    private service: BloodPressureService
   ) {
     super();
     this.lists$ = new Observable<MyChart[]>();
@@ -30,9 +30,10 @@ export class GlucoseChartPage extends BaseChartPage {
   }
 
   async ngOnInit(): Promise<void> {
-    this.splitMin = 100;
-    this.splitMax = 140;
-    this.measure = ["mg/dL"];
+    this.splitMin = 120;
+    this.splitMax = 130;
+    this.measure = ["Sis mmHg", "Dia mmHg", "bpm"];
+    this.numCols = 3;
     await this.loadData();
   }
 
@@ -48,9 +49,9 @@ export class GlucoseChartPage extends BaseChartPage {
             myChart.push({
               name: b.date.toDate().toLocaleString().split(' ')[0],
               value: b.value,
-              value2: 0,
-              value3: 0,
-              color: "" 
+              value2: b.value2,
+              value3: b.value3,
+              color: ""
             });
           });
           this.lists$ = of(myChart);

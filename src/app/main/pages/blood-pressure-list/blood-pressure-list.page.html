@@ -22,6 +22,11 @@
       <ion-item lines="none">{{ "no-list" | translate }}</ion-item>
     </ng-template>
   </ion-list>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button routerLink="/blood-pressures/chart" routerDirection="forward">
+      <ion-icon name="stats-chart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/blood-pressures/create" routerDirection="forward">
       <ion-icon name="add"></ion-icon>

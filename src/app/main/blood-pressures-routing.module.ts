@@ -8,6 +8,10 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       {
+        path: 'chart',
+        loadChildren: './pages/blood-pressure-chart/blood-pressure-chart.module#BloodPressureChartPageModule'
+      },
+      {
         path: 'create',
         loadChildren:
           './pages/blood-pressure-save/blood-pressure-save.module#BloodPressureSavePageModule'

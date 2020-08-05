@@ -2,6 +2,7 @@ import { OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chart } from 'chart.js';
 import { ProjectType } from '../models/projectType.enum';
+import { NumberFormatStyle } from '@angular/common';
 
 export class BaseChartPage implements OnInit {
 
@@ -27,7 +28,7 @@ export class BaseChartPage implements OnInit {
   protected chartType: any;
   protected splitMin: number;
   protected splitMax: number;
-  protected measure: string;
+  protected measure: string[];
   protected isGroup: boolean;
 
   loading: HTMLIonLoadingElement;
@@ -36,6 +37,7 @@ export class BaseChartPage implements OnInit {
 
   protected projectType: number = ProjectType.healthTracker;
   protected valueType: number = 1;
+  protected numCols: number = 1;
 
   protected constructor(
   ) {
@@ -56,8 +58,22 @@ export class BaseChartPage implements OnInit {
           backgroundColor: [],
           borderColor: '',
           borderWidth: 1
-
-        }]
+        }
+        // ,{
+        //   label: '',
+        //   data: [],
+        //   backgroundColor: [],
+        //   borderColor: '',
+        //   borderWidth: 1
+        // }
+        // ,{
+        //   label: '',
+        //   data: [],
+        //   backgroundColor: [],
+        //   borderColor: '',
+        //   borderWidth: 1
+        // }
+      ]
       },
       options: {
         legend: {
@@ -100,11 +116,13 @@ export class BaseChartPage implements OnInit {
       this.splitMin = parseFloat((min + dif).toFixed(1));
       this.splitMax = parseFloat((max - dif).toFixed(1));
       this.myBarChart.options.scales.yAxes[0].ticks.min = min - dif;
+      console.log('min' + this.splitMin);
+      console.log('min' + this.splitMax); 
     });
   }
 
   protected prepareGroupPieChart() {
-    this.myPieChart.data.datasets[0].label = this.measure;
+    this.myPieChart.data.datasets[0].label = this.measure[0];
     this.myPieChart.options.legend.labels.boxWidth = 8;
 
     this.lists$.forEach(a => {
@@ -143,18 +161,45 @@ export class BaseChartPage implements OnInit {
     });
   }
 
+
   protected prepareBarChart(maxItems: number) {
-    this.myBarChart.data.datasets[0].label = this.measure;
+
+    this.myBarChart.data.datasets[0].label = this.measure[0];
+
+    for (let i = 1; i < this.numCols; i++) {
+      this.myBarChart.data.datasets[i] = {
+        label: '',
+        data: [],
+        backgroundColor: [],
+        borderColor: '',
+        borderWidth: 1
+      };
+      this.myBarChart.data.datasets[i].label = this.measure[i];
+    }
 
     var i = 0;
     this.lists$.forEach(a => {
+      
       a.forEach(b => {
         if (i < maxItems || maxItems == 0) {
-          var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
-
+          
           this.myBarChart.data.labels[i] = b.name;
-          this.myBarChart.data.datasets[0].backgroundColor[i] = (b.color === "" ? this.listColors[this.getIndexValue(val)] : b.color);
-          this.myBarChart.data.datasets[0].data[i++] = val;
+
+          let val: number[] = [b.value, b.value2, b.value3];
+
+          val[0] = (this.projectType === ProjectType.fixedExpenses && this.valueType === 2 ? val[1] : val[0]);
+
+          for (let j = 0; j < this.numCols; j++) {
+            this.myBarChart.data.datasets[j].data[i] = val[j];
+            if (this.numCols > 1) {
+              this.myBarChart.data.datasets[j].backgroundColor[i] = this.listColors[this.numCols-j-1];
+            }
+            else {
+              this.myBarChart.data.datasets[j].backgroundColor[i] = (b.color === "" ? this.listColors[this.getIndexValue(val[j])] : b.color);
+            }
+          }
+          
+          i++;
           this.myBarChart.update();
         }
       });
@@ -173,7 +218,10 @@ export class BaseChartPage implements OnInit {
 
   protected createBarChart(results: number) {
     this.myBarChart = this.createChart('bar', (this.valueType === 1 ? this.viewBarChart : this.viewBarChart2));
+    
     if ((this.splitMin === this.splitMax) || this.projectType === ProjectType.fixedExpenses) this.prepareSplitGroups();
+    
+    
     this.prepareBarChart(results);
     this.showBar = (this.valueType === 1);
     this.showBar2 = (this.valueType === 2);
@@ -185,7 +233,7 @@ export class BaseChartPage implements OnInit {
     this.myPieChart = this.createChart('pie',  (this.valueType === 1 ? this.viewPieChart : this.viewPieChart2));
     if ((this.splitMin === this.splitMax) || this.projectType === ProjectType.fixedExpenses) this.prepareSplitGroups();
     if (this.isGroup) {
-    this.listLabels = [`< ${this.splitMin} ${this.measure}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure}`, `>= ${this.splitMax} ${this.measure}`];
+    this.listLabels = [`< ${this.splitMin} ${this.measure[0]}`, `entre ${this.splitMin} e ${this.splitMax} ${this.measure[0]}`, `>= ${this.splitMax} ${this.measure[0]}`];
     this.prepareGroupPieChart();
     }
     else {

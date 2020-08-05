@@ -1,4 +1,4 @@
-<app-base-header [title]="'weight.title'" [isSave]=false [cssName]="'green'">
+<app-base-header [title]="'blood-pressure.title'" [isSave]=false [cssName]="'blue'">
 </app-base-header>
 
 <ion-content class="ion-padding">
@@ -22,13 +22,13 @@
       </div>  
       <div [hidden]="!showBar">
         <canvas #viewBarChart></canvas>
-      </div>  
+      </div> 
       <div [hidden]="!showPie2">
         <canvas #viewPieChart2></canvas>
       </div>  
       <div [hidden]="!showBar2">
         <canvas #viewBarChart2></canvas>
-      </div> 
+      </div>  
     </ion-card-content>
   </ion-card>
 </ion-content>
