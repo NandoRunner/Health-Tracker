@@ -17,6 +17,8 @@ export class BaseChartPage implements OnInit {
 
   protected listColors: string[];
   protected listLabels: string[];
+  protected pointStyles: string[];
+  
 
   @ViewChild('viewPieChart', null) viewPieChart;
   @ViewChild('viewBarChart', null) viewBarChart;
@@ -35,13 +37,23 @@ export class BaseChartPage implements OnInit {
 
   protected lists$: Observable<any>;
 
-  protected projectType: number = ProjectType.healthTracker;
+  protected projectType: number;
   protected valueType: number = 1;
   protected numCols: number = 1;
 
   protected constructor(
   ) {
     this.listColors = ['rgb(0, 150, 0)', 'rgb(0, 0, 150)', 'rgb(150, 0, 0)'];
+    this.pointStyles = ['circle',
+    'triangle',
+    'rect',
+    'rectRounded',
+    'rectRot',
+    'cross',
+    'crossRot',
+    'star',
+    'line',
+    'dash'];
   }
 
   ngOnInit() {
@@ -58,22 +70,7 @@ export class BaseChartPage implements OnInit {
           backgroundColor: [],
           borderColor: '',
           borderWidth: 1
-        }
-        // ,{
-        //   label: '',
-        //   data: [],
-        //   backgroundColor: [],
-        //   borderColor: '',
-        //   borderWidth: 1
-        // }
-        // ,{
-        //   label: '',
-        //   data: [],
-        //   backgroundColor: [],
-        //   borderColor: '',
-        //   borderWidth: 1
-        // }
-      ]
+        }]
       },
       options: {
         legend: {
@@ -81,8 +78,17 @@ export class BaseChartPage implements OnInit {
             boxWidth: 0
           }
         }, scales: {
-          yAxes: []
-        }
+          yAxes: [{
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+          }]
+        }, elements: {
+						point: {
+							pointStyle: this.pointStyles[3]
+						}
+					}
       }
     });
   }
@@ -95,7 +101,7 @@ export class BaseChartPage implements OnInit {
     this.lists$.forEach(a => {
       a.forEach(b => {
 
-        var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
+        var val = (this.valueType === 2 ? b.value2 : b.value);
 
         //console.log(b.value);
         if (primeiro) {
@@ -116,8 +122,6 @@ export class BaseChartPage implements OnInit {
       this.splitMin = parseFloat((min + dif).toFixed(1));
       this.splitMax = parseFloat((max - dif).toFixed(1));
       this.myBarChart.options.scales.yAxes[0].ticks.min = min - dif;
-      console.log('min' + this.splitMin);
-      console.log('min' + this.splitMax); 
     });
   }
 
@@ -130,7 +134,7 @@ export class BaseChartPage implements OnInit {
       this.myPieChart.data.datasets[0].data[1] = 0;
       this.myPieChart.data.datasets[0].data[2] = 0;
       a.forEach(b => {
-        var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
+        var val = (this.valueType === 2 ? b.value2 : b.value);
 
         this.myPieChart.data.datasets[0].data[this.getIndexValue(val)] += 1;
       });
@@ -151,7 +155,7 @@ export class BaseChartPage implements OnInit {
     this.lists$.forEach(a => {
       var i = 0;
       a.forEach(b => {
-        var val = (this.projectType === ProjectType.fixedExpenses &&  this.valueType === 2 ? b.value2 : b.value);
+        var val = (this.valueType === 2 ? b.value2 : b.value);
 
         this.myPieChart.data.labels[i] = b.name;
         this.myPieChart.data.datasets[0].backgroundColor[i] = b.color;
@@ -161,7 +165,6 @@ export class BaseChartPage implements OnInit {
     });
   }
 
-
   protected prepareBarChart(maxItems: number) {
 
     this.myBarChart.data.datasets[0].label = this.measure[0];
@@ -169,30 +172,39 @@ export class BaseChartPage implements OnInit {
     for (let i = 1; i < this.numCols; i++) {
       this.myBarChart.data.datasets[i] = {
         label: '',
+        type: 'line',
         data: [],
         backgroundColor: [],
         borderColor: '',
-        borderWidth: 1
+        borderWidth: 2,
+        fill: false,
+        pointRadius: 5
       };
       this.myBarChart.data.datasets[i].label = this.measure[i];
     }
 
     var i = 0;
     this.lists$.forEach(a => {
-      
       a.forEach(b => {
         if (i < maxItems || maxItems == 0) {
           
           this.myBarChart.data.labels[i] = b.name;
+          let val: number[];
+          if (this.projectType === ProjectType.healthTracker && this.numCols === 3)
+          {
+             val = [b.value3, b.value, b.value2];
+          }
+          else
+          {
+            val = [b.value, b.value2, b.value3];
+          }
 
-          let val: number[] = [b.value, b.value2, b.value3];
-
-          val[0] = (this.projectType === ProjectType.fixedExpenses && this.valueType === 2 ? val[1] : val[0]);
+          val[0] = (this.valueType === 2 ? val[1] : val[0]);
 
           for (let j = 0; j < this.numCols; j++) {
             this.myBarChart.data.datasets[j].data[i] = val[j];
             if (this.numCols > 1) {
-              this.myBarChart.data.datasets[j].backgroundColor[i] = this.listColors[this.numCols-j-1];
+              this.myBarChart.data.datasets[j].backgroundColor[i] = this.listColors[(j+j)%this.numCols];
             }
             else {
               this.myBarChart.data.datasets[j].backgroundColor[i] = (b.color === "" ? this.listColors[this.getIndexValue(val[j])] : b.color);
@@ -220,8 +232,7 @@ export class BaseChartPage implements OnInit {
     this.myBarChart = this.createChart('bar', (this.valueType === 1 ? this.viewBarChart : this.viewBarChart2));
     
     if ((this.splitMin === this.splitMax) || this.projectType === ProjectType.fixedExpenses) this.prepareSplitGroups();
-    
-    
+
     this.prepareBarChart(results);
     this.showBar = (this.valueType === 1);
     this.showBar2 = (this.valueType === 2);

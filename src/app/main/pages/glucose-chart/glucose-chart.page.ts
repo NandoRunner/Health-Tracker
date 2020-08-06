@@ -50,7 +50,7 @@ export class GlucoseChartPage extends BaseChartPage {
               value: b.value,
               value2: 0,
               value3: 0,
-              color: "" 
+              color: ""
             });
           });
           this.lists$ = of(myChart);
@@ -74,6 +74,4 @@ export class GlucoseChartPage extends BaseChartPage {
       this.createBarChart(10);
     }
   }
-
-  
 }
