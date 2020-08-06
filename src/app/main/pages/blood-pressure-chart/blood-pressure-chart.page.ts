@@ -32,7 +32,7 @@ export class BloodPressureChartPage extends BaseChartPage {
   async ngOnInit(): Promise<void> {
     this.splitMin = 120;
     this.splitMax = 130;
-    this.measure = ["Sis mmHg", "Dia mmHg", "bpm"];
+    this.measure = ["bpm", "Sis (mmHg)", "Dia (mmHg)"];
     this.numCols = 3;
     await this.loadData();
   }

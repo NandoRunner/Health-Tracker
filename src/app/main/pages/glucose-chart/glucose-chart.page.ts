@@ -46,7 +46,8 @@ export class GlucoseChartPage extends BaseChartPage {
         this.service.getAll().forEach(a => {
           a.forEach(b => {
             myChart.push({
-              name: b.date.toDate().toLocaleString().split(' ')[0],
+              //name: b.date.toDate().toLocaleString().split(' ')[0],
+               name: ("0" + (b.date.toDate().getDate())).toLocaleString().slice(-2) + "/" + ("0" + (b.date.toDate().getMonth() + 1)).toLocaleString().slice(-2),
               value: b.value,
               value2: 0,
               value3: 0,

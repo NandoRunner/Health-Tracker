@@ -174,11 +174,13 @@ export class BaseChartPage implements OnInit {
         label: '',
         type: 'line',
         data: [],
-        backgroundColor: [],
-        borderColor: '',
-        borderWidth: 2,
+        backgroundColor: [this.listColors[(i+i)%this.numCols]],
+        borderColor: [this.listColors[(i+i)%this.numCols]],
+        borderWidth: 4,
         fill: false,
-        pointRadius: 5
+        //borderDash: [15],
+        pointRadius: 5,
+        pointHoverRadius: 10,
       };
       this.myBarChart.data.datasets[i].label = this.measure[i];
     }
@@ -236,8 +238,17 @@ export class BaseChartPage implements OnInit {
     this.prepareBarChart(results);
     this.showBar = (this.valueType === 1);
     this.showBar2 = (this.valueType === 2);
-    this.subTitle = "chart.bar.subTitle";
-    this.title = "chart.bar.title";
+    if (this.numCols > 1)
+    {
+      this.subTitle = "chart.bar-line.subTitle";
+      this.title = "chart.bar-line.title";
+    }
+    else
+    {
+      this.subTitle = "chart.bar.subTitle";
+      this.title = "chart.bar.title"; 
+    }
+
   }
 
   protected createPieChart() {

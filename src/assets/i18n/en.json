@@ -8,8 +8,9 @@
   "date": "Date",
   "chart": {
     "select": "Select Chart Type",
-    "bar": { "name": "Bar", "title": "Last 10 tests", "subTitle": "Bar Chart" },
-    "pie": { "name": "Pie", "title": "Tests count per group", "subTitle": "Pie Chart" }
+    "bar": { "name": "Bar", "title": "Last 10 tests", "subTitle": "Bar chart" },
+    "bar-line": { "name": "Bar and line", "title": "Last 10 tests", "subTitle": "Bar and line chart" },
+    "pie": { "name": "Pie", "title": "Tests count per group", "subTitle": "Pie chart" }
   },
   "weight": { "title": "Weight Measurements", "menu": "Weight", "new": "New", "edit": "Edit" },
   "blood-pressure": {
@@ -23,7 +24,7 @@
   "login": {
     "name": "Name",
     "password": "Senha",
-    "login": "ENTRAR",
+    "login": "ENTER",
     "signup": "Sign Up",
     "exists": "Already have an account",
     "new": "Create account",
