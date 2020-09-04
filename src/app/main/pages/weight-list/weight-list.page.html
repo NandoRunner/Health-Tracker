@@ -2,11 +2,12 @@
 </app-base-header>
 
 <ion-content class="ion-padding">
-  <ion-list *ngIf="list$ | async as list">
-      <ion-item>
-      <ion-label>{{ "date" | translate }}</ion-label>
-      <ion-label>Kg</ion-label>
-    </ion-item>
+  <ion-list *ngIf="list$ | async as list">  
+    <app-base-item-header 
+      [values]="1"
+      [cssName]="'green'"
+      [colName]="'Kg'">
+      </app-base-item-header>
     <ng-container *ngIf="list.length > 0; else noItems">
       <app-base-item
         *ngFor="let item of list"

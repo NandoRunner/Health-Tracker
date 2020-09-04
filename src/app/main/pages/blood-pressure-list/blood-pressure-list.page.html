@@ -3,12 +3,11 @@
 
 <ion-content class="ion-padding">
   <ion-list *ngIf="list$ | async as list">
-   <ion-item>
-      <ion-label>{{ "date" | translate }}</ion-label>
-      <ion-label>Max (mmHg)</ion-label>
-      <ion-label>Min (mmHg)</ion-label>
-      <ion-label>{{ "blood-pressure.hr" | translate }}</ion-label>
-    </ion-item>
+    <app-base-item-header 
+      [values]="3"
+      [cssName]="'blue'"
+      [colName]="'Max (mmHg), Min (mmHg),blood-pressure.hr'">
+    </app-base-item-header>
     <ng-container *ngIf="list.length > 0; else noItems">
       <app-base-item
         *ngFor="let item of list"

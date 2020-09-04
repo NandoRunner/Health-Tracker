@@ -1,0 +1,6 @@
+<ion-item class="{{ cssName }}">
+  <ion-label class="ion-text-start">{{ "date" | translate }}</ion-label>
+  <ion-label class="ion-text-center">{{ values > 1 ? colName.split(',')[0] : colName | translate}}</ion-label>
+  <ion-label class="ion-text-center" *ngIf="values > 1">{{ colName.split(',')[1] | translate}}</ion-label>
+  <ion-label class="ion-text-center" *ngIf="values > 2">{{ colName.split(',')[2] | translate}}</ion-label>
+</ion-item>
