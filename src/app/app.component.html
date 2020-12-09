@@ -1,11 +1,5 @@
-<ion-split-pane
-contentId="menu-content"
-when="md">
-  <ion-menu
-    contentId="menu-content"
-    menuId="main-menu"
-    [disabled]="true"
-  >
+<ion-split-pane contentId="menu-content" when="md">
+  <ion-menu contentId="menu-content" menuId="main-menu" [disabled]="true">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Menu</ion-title>
@@ -14,7 +8,12 @@ when="md">
 
     <ion-content>
       <ion-list>
-        <ion-list-header *ngIf="user">{{ user.displayName }}</ion-list-header>
+        <div class="ion-text-center">
+          <h1>Health Tracker</h1>
+          <ion-list-header *ngIf="user"
+            ><i>{{ user.displayName }}</i></ion-list-header
+          >
+        </div>
         <ion-menu-toggle autoHide="false">
           <ion-item
             button
