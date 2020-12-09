@@ -1,9 +1,10 @@
-import { OnInit, ViewChild } from '@angular/core';
+import { OnInit, ViewChild, Directive } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chart } from 'chart.js';
 import { ProjectType } from '../models/projectType.enum';
 import { NumberFormatStyle } from '@angular/common';
 
+@Directive()
 export class BaseChartPage implements OnInit {
 
   public title: string;
