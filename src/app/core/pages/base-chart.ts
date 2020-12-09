@@ -20,10 +20,10 @@ export class BaseChartPage implements OnInit {
   protected pointStyles: string[];
   
 
-  @ViewChild('viewPieChart', null) viewPieChart;
-  @ViewChild('viewBarChart', null) viewBarChart;
-  @ViewChild('viewPieChart2', null) viewPieChart2;
-  @ViewChild('viewBarChart2', null) viewBarChart2;
+  @ViewChild('viewPieChart') viewPieChart;
+  @ViewChild('viewBarChart') viewBarChart;
+  @ViewChild('viewPieChart2') viewPieChart2;
+  @ViewChild('viewBarChart2') viewBarChart2;
 
   protected myPieChart: any;
   protected myBarChart: any;
@@ -248,7 +248,6 @@ export class BaseChartPage implements OnInit {
       this.subTitle = "chart.bar.subTitle";
       this.title = "chart.bar.title"; 
     }
-
   }
 
   protected createPieChart() {
