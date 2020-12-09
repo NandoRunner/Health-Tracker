@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { OnInit, Directive } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { OverlayService } from 'src/app/core/services/overlay.service';
 import { PageModel } from '../models/page.model';
 import { TranslateService } from '@ngx-translate/core';
 
+@Directive()
 export class BaseSavePage<T> implements OnInit {
 
   myDate: Date = new Date();

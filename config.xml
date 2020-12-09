@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.fandradetecinfo.healthtracker" version="0.20.32">
+<widget id="com.fandradetecinfo.healthtracker" version="0.20.34">
     <name>health-tracker</name>
     <description>Health Tracker</description>
     <author email="nando.az@gmail.com" href="https://github.com/NandoRunner/Health-Tracker">NandoRunner</author>

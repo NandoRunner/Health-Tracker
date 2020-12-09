@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  CURRENT_VERSION: "0.20.32",
+  CURRENT_VERSION: "0.20.34",
   hostingName: "Health Tracker",
   icon: "pulse",
   init_page: "weights", 

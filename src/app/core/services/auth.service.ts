@@ -33,15 +33,15 @@ export class AuthService {
   }
 
   logout(): Promise<void> {
-    return this.afAuth.auth.signOut();
+    return this.afAuth.signOut();
   }
 
   private signInWithEmail({ email, password }: User): Promise<auth.UserCredential> {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   private signUpWithEmail({ email, password, name }: User): Promise<auth.UserCredential> {
-    return this.afAuth.auth
+    return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(credentials =>
         credentials.user
@@ -59,6 +59,6 @@ export class AuthService {
         break;
     }
 
-    return this.afAuth.auth.signInWithPopup(signInProvider);
+    return this.afAuth.signInWithPopup(signInProvider);
   }
 }

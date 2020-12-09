@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { formatDate } from '@angular/common';
 import { BaseService } from '../services/base.service';
 import { BaseModel } from '../models/base.model';
 
+@Directive()
 export class BaseListPage<T> {
 
   public title: string;
