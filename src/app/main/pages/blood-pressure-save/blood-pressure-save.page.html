@@ -47,6 +47,32 @@
         formControlName="date"
       ></ion-datetime>
     </ion-item>
+    <ion-list>
+    <ion-radio-group allow-empty-selection value="other" formControlName="value4">
+      <ion-list-header>
+        <ion-label>{{'blood-pressure.type.header' | translate}}</ion-label>
+      </ion-list-header>
+      <ion-item color="light">
+        <ion-label class="rdo-label">{{'blood-pressure.type.none' | translate}}</ion-label>
+        <ion-radio slot="start" value="other"></ion-radio>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-label class="rdo-label">{{'blood-pressure.type.wakeup' | translate}}</ion-label>
+        <ion-radio slot="start" color="secondary" value="wakeup"></ion-radio>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-label class="rdo-label">{{'blood-pressure.type.after3h' | translate}}</ion-label>
+        <ion-radio slot="start" color="warning" value="after3h"></ion-radio>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-label class="rdo-label">{{'blood-pressure.type.after6h' | translate}}</ion-label>
+        <ion-radio slot="start" color="danger" value="after6h"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
 
     <ion-button expand="full" type="submit" [disabled]="formGroup.invalid">
       {{'save' | translate}}

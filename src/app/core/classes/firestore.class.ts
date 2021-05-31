@@ -1,7 +1,8 @@
 import { AngularFirestore, AngularFirestoreCollection, QueryFn } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/internal/operators/map';
+// import { map } from 'rxjs/internal/operators/map';
 import * as firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
 
 export abstract class Firestore<T extends { id: string }> {
   protected collection: AngularFirestoreCollection<T>;
@@ -69,17 +70,18 @@ export abstract class Firestore<T extends { id: string }> {
   }
 
   deleteFieldId(id: string): void {
-    const remove = this.collection.doc(id).update({
-      id: firebase.firestore.FieldValue.delete()
-    });
+    const partial: Partial<any> = { id: firebase.firestore.FieldValue.delete() };
+
+    const remove = this.collection.doc(id).update(partial);
   }
 
   deleteOldFields(id: string): void {
-    const remove = this.collection.doc(id).update({
+    const partial: Partial<any> = {
       valueMax: firebase.firestore.FieldValue.delete(),
       valueMin: firebase.firestore.FieldValue.delete(),
       heartRate: firebase.firestore.FieldValue.delete(),
+    };
 
-    });
+    const remove = this.collection.doc(id).update(partial);
   }
 }

@@ -4,15 +4,15 @@
 <ion-content class="ion-padding">
   <ion-list *ngIf="list$ | async as list">
     <app-base-item-header 
-      [values]="3"
+      [values]="4"
       [cssName]="'blue'"
-      [colName]="'Max (mmHg), Min (mmHg),blood-pressure.hr'">
+      [colName]="'Max (mmHg),Min (mmHg),blood-pressure.hr,blood-pressure.type.header'">
     </app-base-item-header>
     <ng-container *ngIf="list.length > 0; else noItems">
       <app-base-item
         *ngFor="let item of list"
         [item]="item"
-        [values]="3"
+        [values]="4"
         (update)="onUpdate($event)"
         (delete)="onDelete($event)"
       ></app-base-item>

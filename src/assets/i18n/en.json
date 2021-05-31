@@ -16,6 +16,7 @@
   "blood-pressure": {
     "title": "Blood Pressure Tests",
     "hr": "Heart Rate (bpm)",
+    "type": { "header": "Type", "none": "None/Other", "wakeup": "Upon waking", "after3h": "3h after medicine", "after6h": "6h after medicine" },
     "menu": "Blood Pressure",
     "new": "New",
     "edit": "Edit"

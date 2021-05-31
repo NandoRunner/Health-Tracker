@@ -10,7 +10,6 @@ import { BaseModel } from '../models/base.model';
 
 @Directive()
 export class BaseListPage<T> {
-
   public title: string;
   public language: string;
   public route: string;
@@ -24,13 +23,13 @@ export class BaseListPage<T> {
     protected name: string
   ) {
     this.title = name.charAt(0).toUpperCase() + name.substr(1).toLowerCase();
-    this.route = name+'s';
+    this.route = name + 's';
   }
 
   async ngOnInit(): Promise<void> {
     const loading = await this.overlayService.loading();
     this.list$ = this.service.getAll();
-    this.list$.pipe(take(1)).subscribe(lists => loading.dismiss());
+    this.list$.pipe(take(1)).subscribe((lists) => loading.dismiss());
   }
 
   onUpdate(o: BaseModel): void {
@@ -39,19 +38,27 @@ export class BaseListPage<T> {
 
   async onDelete(o: BaseModel): Promise<void> {
     await this.overlayService.alert({
-      message: `Do you really want to delete this ${this.title} "${formatDate(o.date.toDate(), 'MM/yyyy', 'en')}" registry?`,
+      message: `Do you really want to delete this ${this.title} "${formatDate(
+        o.date.toDate(),
+        'MM/yyyy',
+        'en'
+      )}" registry?`,
       buttons: [
         {
           text: 'Yes',
           handler: async () => {
             await this.service.delete(o);
             await this.overlayService.toast({
-              message: `${this.title} "${formatDate(o.date.toDate(), 'MM/yyyy', 'en')}" registry deleted!`
+              message: `${this.title} "${formatDate(
+                o.date.toDate(),
+                'MM/yyyy',
+                'en'
+              )}" registry deleted!`,
             });
-          }
+          },
         },
-        'No'
-      ]
+        'No',
+      ],
     });
   }
 }

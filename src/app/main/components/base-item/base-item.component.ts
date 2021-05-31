@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 import { BaseModel } from '../../models/base.model';
 
@@ -8,10 +9,10 @@ import { BaseModel } from '../../models/base.model';
   styleUrls: ['./base-item.component.scss'],
 })
 export class BaseItemComponent {
-
   @Input() item: any;
   @Input() values: number;
   @Output() update = new EventEmitter<BaseModel>();
   @Output() delete = new EventEmitter<BaseModel>();
 
+  constructor(public platform: Platform) {}
 }

@@ -18,6 +18,6 @@ export class BloodPressureListPage extends BaseListPage<BloodPressure> {
     protected overlayService: OverlayService,
     protected service: BloodPressureService
   ) {
-    super(navCtrl, overlayService, service, "bloodpressure");
+    super(navCtrl, overlayService, service, 'blood-pressure');
   }
 }

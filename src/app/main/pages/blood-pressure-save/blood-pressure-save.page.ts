@@ -31,6 +31,7 @@ export class BloodPressureSavePage extends BaseSavePage<BloodPressure> {
     this.formGroup.addControl('value', this.fb.control('', [Validators.min(1), Validators.max(250)]));
     this.formGroup.addControl('value2', this.fb.control('', [Validators.min(1), Validators.max(150)]));
     this.formGroup.addControl('value3', this.fb.control('', [Validators.min(1), Validators.max(250)]));
+    this.formGroup.addControl('value4', this.fb.control(''));
     this.init(this.route.snapshot.paramMap.get('id'));
   }
 }

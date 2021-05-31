@@ -21,6 +21,7 @@
   "blood-pressure": {
     "title": "Medições de Pressão Arterial",
     "hr": "Frequência (bpm)",
+    "type": { "header": "Tipo", "none": "Nenhum/Outro", "wakeup": "Ao acordar", "after3h": "3h após medicação", "after6h": "6h após medicação" },
     "menu": "Pressão Arterial",
     "new": "Nova Medição de Pressão Arterial",
     "edit": "Editar Medição de Pressão Arterial"
