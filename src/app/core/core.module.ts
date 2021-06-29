@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirePerformanceModule } from '@angular/fire/performance';
 
 import { environment } from 'src/environments/environment';
 
@@ -26,6 +27,7 @@ export function CreateTranslateLoader(http: HttpClient) {
   imports: [
     IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirePerformanceModule,
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence({ synchronizeTabs: true }),
     HttpClientModule,
