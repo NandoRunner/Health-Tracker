@@ -9,22 +9,22 @@ const routes: Routes = [
     children: [
       {
         path: 'chart',
-        loadChildren: './pages/blood-pressure-chart/blood-pressure-chart.module#BloodPressureChartPageModule'
+        loadChildren: () => import('./pages/blood-pressure-chart/blood-pressure-chart.module').then(m => m.BloodPressureChartPageModule)
       },
       {
         path: 'create',
         loadChildren:
-          './pages/blood-pressure-save/blood-pressure-save.module#BloodPressureSavePageModule'
+          () => import('./pages/blood-pressure-save/blood-pressure-save.module').then(m => m.BloodPressureSavePageModule)
       },
       {
         path: 'edit/:id',
         loadChildren:
-          './pages/blood-pressure-save/blood-pressure-save.module#BloodPressureSavePageModule'
+          () => import('./pages/blood-pressure-save/blood-pressure-save.module').then(m => m.BloodPressureSavePageModule)
       },
       {
         path: '',
         loadChildren:
-          './pages/blood-pressure-list/blood-pressure-list.module#BloodPressureListPageModule'
+          () => import('./pages/blood-pressure-list/blood-pressure-list.module').then(m => m.BloodPressureListPageModule)
       }
     ]
   }

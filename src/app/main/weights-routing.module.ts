@@ -9,19 +9,19 @@ const routes: Routes = [
     children: [
       {
         path: 'chart',
-        loadChildren: './pages/weight-chart/weight-chart.module#WeightChartPageModule'
+        loadChildren: () => import('./pages/weight-chart/weight-chart.module').then(m => m.WeightChartPageModule)
       },
       {
         path: 'create',
-        loadChildren: './pages/weight-save/weight-save.module#WeightSavePageModule'
+        loadChildren: () => import('./pages/weight-save/weight-save.module').then(m => m.WeightSavePageModule)
       },
       {
         path: 'edit/:id',
-        loadChildren: './pages/weight-save/weight-save.module#WeightSavePageModule'
+        loadChildren: () => import('./pages/weight-save/weight-save.module').then(m => m.WeightSavePageModule)
       },
       {
          path: '',
-         loadChildren: './pages/weight-list/weight-list.module#WeightListPageModule'
+         loadChildren: () => import('./pages/weight-list/weight-list.module').then(m => m.WeightListPageModule)
        }
     ]
   }

@@ -5,17 +5,17 @@ import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', loadChildren: './auth/auth.module#AuthModule' },
-  { path: 'glucoses', loadChildren: './main/glucoses.module#GlucosesModule', canLoad: [AuthGuard] },
+  { path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'glucoses', loadChildren: () => import('./main/glucoses.module').then(m => m.GlucosesModule), canLoad: [AuthGuard] },
   {
     path: 'blood-pressures',
-    loadChildren: './main/blood-pressures.module#BloodPressuresModule',
+    loadChildren: () => import('./main/blood-pressures.module').then(m => m.BloodPressuresModule),
     canLoad: [AuthGuard]
   },
-  { path: 'weights', loadChildren: './main/weights.module#WeightsModule', canLoad: [AuthGuard] },
+  { path: 'weights', loadChildren: () => import('./main/weights.module').then(m => m.WeightsModule), canLoad: [AuthGuard] },
   {
     path: 'language-popover',
-    loadChildren: './main/pages/language-popover/language-popover.module#LanguagePopoverPageModule',
+    loadChildren: () => import('./main/pages/language-popover/language-popover.module').then(m => m.LanguagePopoverPageModule),
     canLoad: [AuthGuard]
   }
 ];

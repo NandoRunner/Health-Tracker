@@ -9,19 +9,19 @@ const routes: Routes = [
     children: [
       {
         path: 'chart',
-        loadChildren: './pages/glucose-chart/glucose-chart.module#GlucoseChartPageModule'
+        loadChildren: () => import('./pages/glucose-chart/glucose-chart.module').then(m => m.GlucoseChartPageModule)
       },
       {
         path: 'create',
-        loadChildren: './pages/glucose-save/glucose-save.module#GlucoseSavePageModule'
+        loadChildren: () => import('./pages/glucose-save/glucose-save.module').then(m => m.GlucoseSavePageModule)
       },
       {
         path: 'edit/:id',
-        loadChildren: './pages/glucose-save/glucose-save.module#GlucoseSavePageModule'
+        loadChildren: () => import('./pages/glucose-save/glucose-save.module').then(m => m.GlucoseSavePageModule)
       },
       {
          path: '',
-         loadChildren: './pages/glucose-list/glucose-list.module#GlucoseListPageModule'
+         loadChildren: () => import('./pages/glucose-list/glucose-list.module').then(m => m.GlucoseListPageModule)
        }
     ]
   }
